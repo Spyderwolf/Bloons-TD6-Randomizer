@@ -27,6 +27,7 @@ void map_select(){
         break;
         case 5:
         std::cout << "The Cabin (Beginner)";
+        break;
         case 6:
         std::cout << "Resort (Beginner)";
         break;
@@ -209,6 +210,58 @@ void difficulty_select(){
     }
 }
 
+int sub_diff_sel;
+void sub_difficulty_select()
+{
+    sub_diff_sel = rand() % 14 + 1;
+
+    switch(sub_diff_sel){
+        case 1:
+        std::cout << "Easy: Standard";
+        break;
+        case 2:
+        std::cout << "Easy: Primary Only";
+        break;
+        case 3:
+        std::cout << "Easy: Deflation";
+        break;
+        case 4:
+        std::cout << "Medium: Standard";
+        break;
+        case 5:
+        std::cout << "Medium: Military Only";
+        break;
+        case 6:
+        std::cout << "Medium: Apopalypse";
+        break;
+        case 7:
+        std::cout << "Medium: Reverse";
+        break;
+        case 8:
+        std::cout << "Hard: Standard";
+        break;
+        case 9:
+        std::cout << "Hard: Magic Only";
+        break;
+        case 10:
+        std::cout << "Hard: Double HP MOABS";
+        break;
+        case 11:
+        std::cout << "Hard: Half Cash";
+        break;
+        case 12:
+        std::cout << "Hard: Alternate Bloon Rounds";
+        break;
+        case 13:
+        std::cout << "Hard: Impoppable";
+        break;
+        case 14:
+        std::cout << "Hard: CHIMPS";
+        break;
+    }
+
+}
+
 int hero_sel;
 void hero_select(){
     hero_sel = rand() % 14 + 1;
@@ -270,8 +323,14 @@ void clear(){
 }
 
 char run = 'y';
+char subdiff_setting = 'n';
+
 int main()
 {
+    std::cout << "Version 1.1.0" << std::endl;
+    std::cout << "Enable Sub-Difficulty Selection? (y/n)? ";
+    std::cin >> subdiff_setting;
+    
     while (run == 'y')
     {
         usleep(1500000);
@@ -280,8 +339,18 @@ int main()
 
         map_select();
         std::cout << std::endl;
-        difficulty_select();
-        std::cout << std::endl;
+
+        if (subdiff_setting == 'y')
+        {
+            sub_difficulty_select();
+            std::cout << std::endl;
+        }
+        else
+        {
+            difficulty_select();
+            std::cout << std::endl;
+        }
+
         hero_select();
         std::cout << std::endl;
         std::cout << std::endl;
