@@ -10,7 +10,7 @@ void init_rand()
 
 int map_sel;
 void map_select(){
-    map_sel = rand() % 60 + 1;
+    map_sel = rand() % 61 + 1;
     
     switch (map_sel){
         case 1:
@@ -190,6 +190,11 @@ void map_select(){
         case 60:
         std::cout << "#Ouch (Expert)";
         break;
+
+        //NEW MAPS
+        case 61:
+        std::cout << "Quarry (Intermediate)";
+        break;
     }
 }
 
@@ -312,6 +317,38 @@ void hero_select(){
     }
 }
 
+char towerlim_setting = 'n';
+int tower_max;
+void tower_limit_setup(){
+    if (towerlim_setting = 'y')
+    {
+        char tower_input;
+
+        std::cout << "Tower Limit can be set to Low(11)/Medium(33)/High(66) (l/m/h): ";
+        std::cin >> tower_input;
+
+        if (tower_input == 'l')
+        {
+            tower_max = 11;
+        }
+        if (tower_input == 'm')
+        {
+            tower_max = 33;
+        }
+        if (tower_input == 'h')
+        {
+            tower_max = 66;
+        }
+    }
+}
+
+int tower_limit_sel;
+void tower_limit_select(){
+     //tower_limit_sel = rand() % 66 + 1;
+     tower_limit_sel = rand() % tower_max + 1;
+     std::cout << "Tower Limit: " << tower_limit_sel;
+}
+
 int n = 100;
 void clear(){
     while (n > 0)
@@ -327,13 +364,16 @@ char subdiff_setting = 'n';
 
 int main()
 {
-    std::cout << "Version 1.1.0" << std::endl;
+    std::cout << "Version 1.2.0" << std::endl;
     std::cout << "Enable Sub-Difficulty Selection? (y/n)? ";
     std::cin >> subdiff_setting;
-    
+    std::cout << "Enable Tower Limit Setting (WIP)? (y/n)? ";
+    std::cin >> towerlim_setting;
+    tower_limit_setup();
+
     while (run == 'y')
     {
-        usleep(1500000);
+        usleep(750000);
         clear();
         init_rand();
 
@@ -353,8 +393,14 @@ int main()
 
         hero_select();
         std::cout << std::endl;
+
+        if (towerlim_setting == 'y')
+        {
+            tower_limit_select();
+        }
         std::cout << std::endl;
 
+        std::cout << std::endl;
         std::cout << "Reroll (y/n)? ";
         std::cin >> run;
         if (run != 'y')
